@@ -5,135 +5,526 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Soumesh Banerjee</title>
+    <title>Soumesh Banerjee — Staff Software Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
         integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-        .tags:not(:last-child) {
-            margin-bottom: 0;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .hero.is-info .title {
-            font-size: 4rem;
+        body {
+            background-color: #f5f5f5;
         }
+
+        /* Navbar */
+        .navbar.is-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        /* Hero */
+        .cv-hero {
+            background: linear-gradient(135deg, #209cee 0%, #1a73c4 100%);
+            color: white;
+            padding: 3.5rem 1.5rem 3rem;
+        }
+
+        .cv-hero .title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .cv-hero .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 1.25rem;
+        }
+
+        .cv-hero .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.92rem;
+            margin-right: 1.25rem;
+        }
+
+        .cv-hero .social-links a {
+            color: white;
+            font-size: 1.4rem;
+            margin-right: 1rem;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+
+        .cv-hero .social-links a:hover {
+            opacity: 1;
+        }
+
+        /* Section headings */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #1a73c4;
+            border-left: 4px solid #209cee;
+            padding-left: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            bottom: 0;
+            width: 2px;
+            background: #dbdbdb;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.25rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.9rem;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #209cee;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #209cee;
+        }
+
+        .timeline-item .company {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #363636;
+        }
+
+        .timeline-item .role {
+            font-weight: 600;
+            color: #4a4a4a;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item .period {
+            font-size: 0.85rem;
+            color: #7a7a7a;
+            white-space: nowrap;
+        }
+
+        .timeline-item .location {
+            font-size: 0.85rem;
+            color: #7a7a7a;
+        }
+
+        .timeline-item ul {
+            margin-top: 0.6rem;
+            padding-left: 1.1rem;
+            list-style: disc;
+        }
+
+        .timeline-item ul li {
+            font-size: 0.92rem;
+            color: #4a4a4a;
+            margin-bottom: 0.3rem;
+            line-height: 1.5;
+        }
+
+        .timeline-item .tech-tags {
+            margin-top: 0.6rem;
+        }
+
+        /* Skills */
+        .skill-group {
+            margin-bottom: 1rem;
+        }
+
+        .skill-group-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #7a7a7a;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Cards */
+        .cv-card {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Education */
+        .edu-degree {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #363636;
+        }
+
+        .edu-field {
+            color: #4a4a4a;
+            font-size: 0.95rem;
+        }
+
+        .edu-school {
+            font-size: 0.9rem;
+            color: #7a7a7a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cv-hero .title { font-size: 2rem; }
+            .meta-item { display: block; margin-bottom: 0.3rem; }
+        }
+
+        /* Navbar burger active */
+        .navbar-menu.is-active { display: block; }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <div class="modal" :class="{'is-active': isInfoModalShown}">
-            <div class="modal-background" @click="toggleInfoModal"></div>
-            <div class="modal-content">
-                <div class="box">
-                    <article class="media">
-                        <div class="media-left">
-                            <figure class="image is-64x64">
-                                <img src="https://pbs.twimg.com/profile_images/754358961642561536/LfxzQpm0_400x400.jpg"
-                                    alt="Image" style="border-radius: 50%">
-                            </figure>
+
+        <!-- Sticky Navbar -->
+        <nav class="navbar is-dark is-sticky" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item has-text-weight-bold" href="#top">SB</a>
+                    <a role="button" class="navbar-burger burger" :class="{'is-active': navOpen}"
+                        @click="navOpen = !navOpen" aria-label="menu">
+                        <span></span><span></span><span></span>
+                    </a>
+                </div>
+                <div class="navbar-menu" :class="{'is-active': navOpen}" @click="navOpen = false">
+                    <div class="navbar-end">
+                        <a class="navbar-item" href="#experience">Experience</a>
+                        <a class="navbar-item" href="#skills">Skills</a>
+                        <a class="navbar-item" href="#education">Education</a>
+                        <div class="navbar-item">
+                            <a class="button is-info is-small" href="mailto:soumeshbanerjee@live.com">
+                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                <span>Contact</span>
+                            </a>
                         </div>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>Soumesh Banerjee</strong>
-                                </p>
-                            </div>
-                            <nav class="level is-mobile">
-                                <div class="level-left">
-                                    <a class="level-item" aria-label="twitter" href="https://twitter.com/sud_oo"
-                                        target="_blank">
-                                        <span class="icon is-small">
-                                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="githib" href="https://github.com/SoumeshBanerjee"
-                                        target="_blank">
-                                        <span class="icon is-small">
-                                            <i class="fab fa-github" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="linkedin"
-                                        href="https://www.linkedin.com/in/sudoo/" target="_blank">
-                                        <span class="icon is-small">
-                                            <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="stackoverflow"
-                                        href="https://stackoverflow.com/users/2256024/soumesh-banerjee" target="_blank">
-                                        <span class="icon is-small">
-                                            <i class="fab fa-stack-overflow" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                    <a class="level-item" aria-label="skype" href="skype:soumeshbanerjee@live.com?call" target="_blank">
-                                        <span class="icon is-small">
-                                            <i class="fab fa-skype" aria-hidden="true"></i>
-                                        </span>
-                                    </a>
-                                </div>
-                            </nav>
-                        </div>
-                    </article>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Header -->
+        <div id="top" class="cv-hero">
+            <div class="container">
+                <p class="title">Soumesh Banerjee</p>
+                <p class="subtitle">Staff Software Engineer</p>
+
+                <div style="margin-bottom: 1.25rem;">
+                    <span class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i> Oslo, Norway
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-globe"></i> Open to Relocate
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i> 3 Months Notice Period
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:soumeshbanerjee@live.com" style="color:inherit;">soumeshbanerjee@live.com</a>
+                    </span>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/pwmb" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sudoo/" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://stackoverflow.com/users/2256024/soumesh-banerjee" target="_blank" aria-label="Stack Overflow">
+                        <i class="fab fa-stack-overflow"></i>
+                    </a>
+                    <a href="https://twitter.com/sud_oo" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="skype:soumeshbanerjee@live.com?call" aria-label="Skype">
+                        <i class="fab fa-skype"></i>
+                    </a>
                 </div>
             </div>
         </div>
-        <section class="hero is-info is-fullheight">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Soumesh Banerjee
-                        <button class="button is-black" @click="toggleInfoModal">
-                            <i class="fas fa-info-circle"></i>
-                        </button>
-                    </h1>
-                    <h2 class="subtitle">
-                        <div class="tags">
-                            <span class="tag is-danger">Senior Software Engineer</span>
-                            <span class="tag is-warning">iOS</span>
-                            <span class="tag is-warning">AWS</span>
-                            <span class="tag is-warning">Linux</span>
-                            <span class="tag is-warning">MacOSX</span>
+
+        <!-- Main Content -->
+        <div class="container" style="padding: 2rem 1.5rem;">
+            <div class="columns">
+
+                <!-- Left Column: Experience -->
+                <div class="column is-8">
+
+                    <!-- Experience -->
+                    <section id="experience">
+                        <div class="cv-card">
+                            <p class="section-title">Experience</p>
+                            <div class="timeline">
+
+                                <!-- Coop Norge -->
+                                <div class="timeline-item">
+                                    <div class="columns is-mobile is-vcentered" style="margin-bottom:0.1rem;">
+                                        <div class="column">
+                                            <span class="company">Coop Norge SA</span>
+                                            <span class="location"> &mdash; Oslo, Norway</span>
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="period">Oct 2022 &ndash; Present</span>
+                                        </div>
+                                    </div>
+                                    <p class="role">Staff Software Engineer</p>
+                                    <div class="tech-tags tags">
+                                        <span class="tag is-info is-light">Golang</span>
+                                        <span class="tag is-info is-light">Kubernetes</span>
+                                        <span class="tag is-info is-light">Datadog</span>
+                                        <span class="tag is-info is-light">Cloud Functions</span>
+                                        <span class="tag is-info is-light">PubSub</span>
+                                        <span class="tag is-info is-light">Ecom</span>
+                                    </div>
+                                    <ul>
+                                        <li>Developed parcel tracking service for online order delivery fulfillment through various parcel locker vendors across the country.</li>
+                                        <li>Develop and maintain various ECom. components like prices, offers and campaigns services used by all Coop and Obs Stores in Norway.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Cognite -->
+                                <div class="timeline-item">
+                                    <div class="columns is-mobile is-vcentered" style="margin-bottom:0.1rem;">
+                                        <div class="column">
+                                            <span class="company">Cognite AS</span>
+                                            <span class="location"> &mdash; Oslo, Norway</span>
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="period">Mar 2021 &ndash; Oct 2022</span>
+                                        </div>
+                                    </div>
+                                    <p class="role">Software Engineer II</p>
+                                    <div class="tech-tags tags">
+                                        <span class="tag is-info is-light">GraphQL</span>
+                                        <span class="tag is-info is-light">NodeJS</span>
+                                        <span class="tag is-info is-light">React</span>
+                                        <span class="tag is-info is-light">Kubernetes</span>
+                                        <span class="tag is-info is-light">Terraform</span>
+                                        <span class="tag is-info is-light">Prometheus</span>
+                                        <span class="tag is-info is-light">Neo4j</span>
+                                        <span class="tag is-info is-light">GCP</span>
+                                    </div>
+                                    <ul>
+                                        <li>Developed and maintained a data platform, CLI tool and CI/CD pipelines to build digital twins using industrial data from Utilities, Oil &amp; Gas companies.</li>
+                                        <li>Provided GraphQL and REST APIs to interact with data and create models to drive complex business decisions.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Espressif -->
+                                <div class="timeline-item">
+                                    <div class="columns is-mobile is-vcentered" style="margin-bottom:0.1rem;">
+                                        <div class="column">
+                                            <span class="company">Espressif Systems</span>
+                                            <span class="location"> &mdash; Shanghai, China</span>
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="period">May 2019 &ndash; Feb 2021</span>
+                                        </div>
+                                    </div>
+                                    <p class="role">Software Engineer (T2)</p>
+                                    <div class="tech-tags tags">
+                                        <span class="tag is-info is-light">NodeJS</span>
+                                        <span class="tag is-info is-light">Python</span>
+                                        <span class="tag is-info is-light">VueJS</span>
+                                        <span class="tag is-info is-light">Docker</span>
+                                        <span class="tag is-info is-light">GoLang</span>
+                                        <span class="tag is-info is-light">MongoDB</span>
+                                        <span class="tag is-info is-light">AWS</span>
+                                        <span class="tag is-info is-light">Electron</span>
+                                    </div>
+                                    <ul>
+                                        <li>Designed, developed and documented the ESP-IDF VS Code Extension, improving developer experience and providing granular control for ESP SoCs.</li>
+                                        <li>Designed and developed SSR frontend for the IDF Component Registry (like npm/pip) for sharing open-source components for ESP32/S2 and IoT projects.</li>
+                                        <li>Developed IDF Web IDE which slashed the installation effort by <strong>92%</strong>, utilising pre-built Docker containers with a desktop companion app for hardware communications.</li>
+                                        <li>Published tutorial videos, stayed active in the forum and grew the audience for various open-source projects.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Kony Senior -->
+                                <div class="timeline-item">
+                                    <div class="columns is-mobile is-vcentered" style="margin-bottom:0.1rem;">
+                                        <div class="column">
+                                            <span class="company">Kony Inc.</span>
+                                            <span class="location"> &mdash; Hyderabad, India</span>
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="period">Sept 2017 &ndash; May 2019</span>
+                                        </div>
+                                    </div>
+                                    <p class="role">Senior Software Development Engineer</p>
+                                    <div class="tech-tags tags">
+                                        <span class="tag is-info is-light">NodeJS</span>
+                                        <span class="tag is-info is-light">Python</span>
+                                        <span class="tag is-info is-light">GoLang</span>
+                                        <span class="tag is-info is-light">React</span>
+                                        <span class="tag is-info is-light">Postgres</span>
+                                        <span class="tag is-info is-light">Docker</span>
+                                        <span class="tag is-info is-light">AWS</span>
+                                        <span class="tag is-info is-light">iOS</span>
+                                        <span class="tag is-info is-light">ObjC</span>
+                                        <span class="tag is-info is-light">Swift</span>
+                                    </div>
+                                    <ul>
+                                        <li>Developed a distributed node management and extension system for in-house automations consumed by <strong>7 teams</strong>, processing <strong>50K+ distributed tasks</strong> and saving <strong>56,000+ work hours</strong> by adding 5 nodes over a week.</li>
+                                        <li>Developed rich UI for generating UI tests for Kony Test Framework, enabling BDD and eliminating the need for coding by covering <strong>94% of the APIs</strong>.</li>
+                                        <li>Designed a USB-to-TCP packet relay framework for iPhone enabling app sideloading, UIElement inspection and realtime editing — also the base for the IPA installer shipped with Kony IDE.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Kony Intern -->
+                                <div class="timeline-item">
+                                    <div class="columns is-mobile is-vcentered" style="margin-bottom:0.1rem;">
+                                        <div class="column">
+                                            <span class="company">Kony Inc.</span>
+                                            <span class="location"> &mdash; Hyderabad, India</span>
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="period">Aug 2016 &ndash; Sept 2017</span>
+                                        </div>
+                                    </div>
+                                    <p class="role">Associate Engineer (Paid Internship)</p>
+                                    <ul>
+                                        <li>Laid the foundation for an internal testing framework (iOS, Android, Web) used by <strong>4 teams</strong> and <strong>20+ developers</strong>, running <strong>50K+ test schemes</strong> as part of CI — detecting <strong>1,000+ regressions</strong> in the initial phase.</li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="tags">
-                            <span class="tag is-dark">GoLang</span>
-                            <span class="tag is-dark">Rust</span>
-                            <span class="tag is-dark">NodeJS</span>
-                            <span class="tag is-dark">ObjectiveC</span>
-                            <span class="tag is-dark">Swift</span>
-                            <span class="tag is-dark">Python</span>
-                            <span class="tag is-dark">C</span>
+                    </section>
+
+                </div>
+
+                <!-- Right Column: Skills + Education -->
+                <div class="column is-4">
+
+                    <!-- Skills -->
+                    <section id="skills">
+                        <div class="cv-card">
+                            <p class="section-title">Skills</p>
+
+                            <div class="skill-group">
+                                <p class="skill-group-label">Languages</p>
+                                <div class="tags">
+                                    <span class="tag is-dark">Node.js / TypeScript</span>
+                                    <span class="tag is-dark">Python</span>
+                                    <span class="tag is-dark">GoLang</span>
+                                    <span class="tag is-dark">Kotlin / Java</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-group">
+                                <p class="skill-group-label">Frontend</p>
+                                <div class="tags">
+                                    <span class="tag is-dark">React / Next.js</span>
+                                    <span class="tag is-dark">VueJS / Nuxt</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-group">
+                                <p class="skill-group-label">DevOps &amp; Cloud</p>
+                                <div class="tags">
+                                    <span class="tag is-dark">Docker</span>
+                                    <span class="tag is-dark">Kubernetes</span>
+                                    <span class="tag is-dark">Terraform</span>
+                                    <span class="tag is-dark">Prometheus</span>
+                                    <span class="tag is-dark">Grafana</span>
+                                    <span class="tag is-dark">Datadog</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-group">
+                                <p class="skill-group-label">Data &amp; APIs</p>
+                                <div class="tags">
+                                    <span class="tag is-dark">GraphQL</span>
+                                    <span class="tag is-dark">PostgreSQL</span>
+                                    <span class="tag is-dark">MongoDB</span>
+                                    <span class="tag is-dark">Neo4j</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tags">
-                            <span class="tag is-link">System Designs & Patterns</span>
-                            <span class="tag is-link">Wiki & Markdown</span>
-                            <span class="tag is-link">PlantUML</span>
-                            <span class="tag is-link">JIRA</span>
+                    </section>
+
+                    <!-- Education -->
+                    <section id="education">
+                        <div class="cv-card">
+                            <p class="section-title">Education</p>
+                            <p class="edu-degree">Bachelors of Technology</p>
+                            <p class="edu-field">Computer Science &amp; Engineering</p>
+                            <p class="edu-school">
+                                <i class="fas fa-university" style="margin-right:0.3rem;"></i>
+                                LPU &mdash; India &nbsp;&bull;&nbsp; 2013 &ndash; 2017
+                            </p>
                         </div>
-                        <div class="tags">
-                            <span class="tag is-light">IOT</span>
-                            <span class="tag is-light">Machine Learning</span>
-                            <span class="tag is-light">Communication Protocols</span>
-                            <span class="tag is-light">Embeded-C</span>
-                        </div>
-                    </h2>
+                    </section>
+
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer" style="padding: 2rem 1.5rem; background: #363636; color: #ccc;">
+            <div class="container has-text-centered">
+                <div style="margin-bottom: 0.75rem;">
+                    <a href="https://github.com/pwmb" target="_blank" class="has-text-grey-light" style="margin: 0 0.6rem;" aria-label="GitHub">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sudoo/" target="_blank" class="has-text-grey-light" style="margin: 0 0.6rem;" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin fa-lg"></i>
+                    </a>
+                    <a href="https://stackoverflow.com/users/2256024/soumesh-banerjee" target="_blank" class="has-text-grey-light" style="margin: 0 0.6rem;" aria-label="Stack Overflow">
+                        <i class="fab fa-stack-overflow fa-lg"></i>
+                    </a>
+                    <a href="https://twitter.com/sud_oo" target="_blank" class="has-text-grey-light" style="margin: 0 0.6rem;" aria-label="Twitter">
+                        <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                </div>
+                <p class="is-size-7">Soumesh Banerjee &mdash; Oslo, Norway</p>
+            </div>
+        </footer>
+
     </div>
+
     <script>
-        let vm = new Vue({
+        new Vue({
             el: '#app',
             data: {
-                isInfoModalShown: false
-            },
-            methods: {
-                toggleInfoModal: function (e) {
-                    this.isInfoModalShown = !this.isInfoModalShown
-                }
+                navOpen: false
             }
-        })
+        });
     </script>
 </body>
 
