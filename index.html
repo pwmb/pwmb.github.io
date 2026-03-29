@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Soumesh Banerjee – CV</title>
+  <title>Soumesh</title>
   <style>
     :root {
       --bg: #f9f9f7;
@@ -17,18 +17,7 @@
       --tag-text: #2563eb;
       --shadow: 0 1px 4px rgba(0,0,0,0.07);
     }
-    [data-theme="dark"] {
-      --bg: #000000;
-      --card: #111111;
-      --text: #f0f0f0;
-      --sub: #888888;
-      --accent: #60a5fa;
-      --border: #222222;
-      --tag-bg: #1a1a1a;
-      --tag-text: #93c5fd;
-      --shadow: 0 1px 6px rgba(0,0,0,0.7);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); transition: background .3s, color .3s; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -67,6 +56,8 @@
     .tag { background: var(--tag-bg); color: var(--tag-text); border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
     .job ul { padding-left: 18px; }
     .job ul li { font-size: 13.5px; line-height: 1.65; color: var(--text); margin-bottom: 5px; }
+    .job-role { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+    .job-role-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; margin-bottom: 2px; }
 
     /* SKILLS */
     .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -93,14 +84,10 @@
 <body>
 
 <div class="topbar">
-  <button class="btn" onclick="toggleTheme()">
-    <svg id="theme-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
-    <span id="theme-label">Dark Mode</span>
-  </button>
-  <button class="btn" onclick="window.print()">
+  <a class="btn" href="CV-Soumesh_Banerjee.pdf" download>
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M4 12H3a1 1 0 00-1 1v4h20v-4a1 1 0 00-1-1h-1M8 12V4h8v8"></path></svg>
-    Download / Print PDF
-  </button>
+    Download CV
+  </a>
 </div>
 
 <div class="wrapper">
@@ -108,7 +95,7 @@
   <!-- HEADER -->
   <div class="header">
     <h1>Soumesh Banerjee</h1>
-    <div class="role">Staff Software Engineer</div>
+    <div class="role">Software Engineer</div>
     <div class="meta">
       <span>
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9-6 9 6v12a1 1 0 01-1 1H4a1 1 0 01-1-1V8z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 21V12h6v9"></path></svg>
@@ -144,10 +131,28 @@
     <div class="job">
       <div class="job-header">
         <div>
+          <div class="job-company">Norsk Rikstoto <span class="job-loc">— Oslo, Norway</span></div>
+          <div class="job-title">Senior Software Engineer</div>
+        </div>
+        <div class="job-date">May 2024 – Present</div>
+      </div> 
+      <div class="tags">
+        <span class="tag">.Net / C#</span><span class="tag">Kubernetes</span><span class="tag">Elasticsearch</span><span class="tag">Grafana</span><span class="tag">Azure Service Bus</span><span class="tag">NServiceBus</span><span class="tag">NServiceBus</span>
+      </div>
+      <ul>
+        <li>Modernized legacy systems and start using various open standards.</li>
+        <li>Worked on migrating services from on-prem to Azure Kubernetes Service (AKS).</li>
+        <li>Developed and maintained various microservices and cloud-native applications.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
           <div class="job-company">Coop Norge SA <span class="job-loc">— Oslo, Norway</span></div>
           <div class="job-title">Staff Software Engineer</div>
         </div>
-        <div class="job-date">Oct 2022 – Present</div>
+        <div class="job-date">Oct 2022 – May 2024</div>
       </div>
       <div class="tags">
         <span class="tag">Golang</span><span class="tag">Kubernetes</span><span class="tag">Datadog</span><span class="tag">Cloud Functions</span><span class="tag">PubSub</span><span class="tag">Ecom</span>
@@ -198,31 +203,34 @@
       <div class="job-header">
         <div>
           <div class="job-company">Kony Inc. <span class="job-loc">— Hyderabad, India</span></div>
-          <div class="job-title">Senior Software Development Engineer</div>
         </div>
-        <div class="job-date">Sept 2017 – May 2019</div>
+        <div class="job-date">Aug 2016 – May 2019</div>
       </div>
-      <div class="tags">
-        <span class="tag">NodeJS</span><span class="tag">Python</span><span class="tag">GoLang</span><span class="tag">React</span><span class="tag">Postgres</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Swift</span><span class="tag">ObjC</span>
-      </div>
-      <ul>
-        <li>Built a distributed node management and extension system for in-house automations, adopted by 7 teams, processing 50K+ distributed tasks and saving 56,000+ work hours.</li>
-        <li>Developed a rich UI for generating UI tests in the Kony Test Framework, enabling BDD and covering 94% of APIs — eliminating manual coding.</li>
-        <li>Designed a USB-to-TCP packet relay framework for iPhone enabling side-loading and real-time UIElement inspection; also served as the base for the IPA installer in Kony IDE.</li>
-      </ul>
-    </div>
 
-    <div class="job">
-      <div class="job-header">
-        <div>
-          <div class="job-company">Kony Inc. <span class="job-loc">— Hyderabad, India</span></div>
-          <div class="job-title">Associate Engineer (Paid Internship)</div>
+      <div class="job-role">
+        <div class="job-role-header">
+          <div class="job-title">Senior Software Development Engineer</div>
+          <div class="job-date">Sept 2017 – May 2019</div>
         </div>
-        <div class="job-date">Aug 2016 – Sept 2017</div>
+        <div class="tags">
+          <span class="tag">NodeJS</span><span class="tag">Python</span><span class="tag">GoLang</span><span class="tag">React</span><span class="tag">Postgres</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">Swift</span><span class="tag">ObjC</span>
+        </div>
+        <ul>
+          <li>Built a distributed node management and extension system for in-house automations, adopted by 7 teams, processing 50K+ distributed tasks and saving 56,000+ work hours.</li>
+          <li>Developed a rich UI for generating UI tests in the Kony Test Framework, enabling BDD and covering 94% of APIs — eliminating manual coding.</li>
+          <li>Designed a USB-to-TCP packet relay framework for iPhone enabling side-loading and real-time UIElement inspection; also served as the base for the IPA installer in Kony IDE.</li>
+        </ul>
       </div>
-      <ul>
-        <li>Laid the foundation for an internal testing framework (iOS, Android, Web), used by 4 teams and 20+ developers, running 50K+ test schemes in CI and detecting 1,000+ regressions in the initial phase.</li>
-      </ul>
+
+      <div class="job-role">
+        <div class="job-role-header">
+          <div class="job-title">Associate Engineer (Paid Internship)</div>
+          <div class="job-date">Aug 2016 – Sept 2017</div>
+        </div>
+        <ul>
+          <li>Laid the foundation for an internal testing framework (iOS, Android, Web), used by 4 teams and 20+ developers, running 50K+ test schemes in CI and detecting 1,000+ regressions in the initial phase.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -263,18 +271,6 @@
 
 </div>
 
-<script>
-  let dark = false;
-  function toggleTheme() {
-    dark = !dark;
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-    document.getElementById('theme-label').textContent = dark ? 'Light Mode' : 'Dark Mode';
-    const icon = document.getElementById('theme-icon');
-    icon.innerHTML = dark
-      ? '<circle cx="12" cy="12" r="5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="1" x2="12" y2="3" stroke-linecap="round"/><line x1="12" y1="21" x2="12" y2="23" stroke-linecap="round"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke-linecap="round"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke-linecap="round"/><line x1="1" y1="12" x2="3" y2="12" stroke-linecap="round"/><line x1="21" y1="12" x2="23" y2="12" stroke-linecap="round"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke-linecap="round"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke-linecap="round"/>'
-      : '<path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
-  }
-</script>
 
 </body>
 </html>
