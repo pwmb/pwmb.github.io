@@ -17,15 +17,15 @@
       --tag-text: #2563eb;
       --shadow: 0 1px 4px rgba(0,0,0,0.07);
     }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); transition: background .3s, color .3s; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     /* TOP BAR */
     .topbar { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 24px; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text); transition: background .2s, color .2s; font-weight: 500; }
-    .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 500; text-decoration: none; transition: background .2s, color .2s; }
+    .btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
     .btn svg { width: 15px; height: 15px; }
 
     /* LAYOUT */
@@ -35,10 +35,10 @@
     .header { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 36px 36px 28px; margin-bottom: 20px; box-shadow: var(--shadow); }
     .header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
     .header .role { font-size: 1rem; color: var(--accent); font-weight: 500; margin: 4px 0 18px; }
-    .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--sub); }
-    .meta span { display: flex; align-items: center; gap: 5px; }
-    .meta svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .badge { background: var(--tag-bg); color: var(--tag-text); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 500; }
+    .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0; font-size: 13px; color: var(--sub); }
+    .meta-item { display: flex; align-items: center; gap: 5px; }
+    .meta-item + .meta-item::before { content: '·'; margin: 0 10px; color: #ccc; font-size: 16px; line-height: 1; }
+    .meta svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.6; }
 
     /* SECTIONS */
     .section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-bottom: 20px; box-shadow: var(--shadow); }
@@ -61,7 +61,7 @@
 
     /* SKILLS */
     .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill { background: var(--tag-bg); color: var(--tag-text); border-radius: 8px; padding: 6px 13px; font-size: 13px; font-weight: 500; }
+    .skill { background: var(--tag-bg); color: var(--tag-text); border-radius: 8px; padding: 6px 13px; font-size: 13px; font-weight: 500; flex: 1 1 auto; text-align: center; }
 
     /* EDUCATION */
     .edu { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
@@ -75,9 +75,43 @@
     .link-btn:hover { background: var(--accent); color: #fff; text-decoration: none; }
 
     @media print {
+      @page { size: A4; margin: 1cm 1.2cm; }
+
       .topbar { display: none; }
-      body { background: white; }
-      .section, .header { box-shadow: none; border-color: #ddd; }
+      a { color: #1a1a1a; }
+
+      body { font-size: 10px; }
+      .wrapper { max-width: 100%; padding: 0; }
+
+      .header { background: none; border: none; border-radius: 0; box-shadow: none; padding: 0 0 8px 0; margin-bottom: 10px; border-bottom: .3px solid #ccc; }
+      .header h1 { font-size: 18px; }
+      .header .role { font-size: 10px; margin: 1px 0 8px; }
+      .meta { gap: 10px; font-size: 9.5px; }
+
+      .links { gap: 5px; margin-top: 7px; }
+      .link-btn { padding: 2px 7px; font-size: 9.5px; background: none; border-radius: 0; border: 1px solid #bbb; color: #333; }
+
+      .section { margin-bottom: 0; background: none; border: none; border-radius: 0; box-shadow: none; padding: 14px 0 0 0; }
+      .header + .section { padding-top: 12px; }
+      .section-title { font-size: 9px; letter-spacing: 1.4px; padding-bottom: 4px; margin-bottom: 10px; color: #2563eb; border-bottom: 1px solid #333; }
+
+      .job { padding-bottom: 8px; margin-bottom: 8px; page-break-inside: avoid; }
+      .job-company { font-size: 10.5px; }
+      .job-title { font-size: 9.5px; }
+      .job-date { font-size: 9px; }
+      .job-loc { font-size: 9px; }
+      .tags { gap: 3px; margin: 4px 0; }
+      .tag { padding: 0 5px; font-size: 8.5px; background: none; border-radius: 0; border: 1px solid #bbb; color: #333; }
+      .job ul { padding-left: 12px; margin-top: 3px; }
+      .job ul li { font-size: 9.5px; line-height: 1.45; margin-bottom: 2px; }
+      .job-role { margin-top: 6px; padding-top: 6px; }
+
+      .skills-grid { gap: 4px; }
+      .skill { padding: 1px 7px; font-size: 9.5px; background: none; border-radius: 0; border: 1px solid #bbb; color: #333; flex: 0 1 auto; }
+
+      .edu-left h3 { font-size: 10.5px; }
+      .edu-left p, .edu-right { font-size: 9.5px; }
+      .meta-item + .meta-item::before { color: #999; }
     }
   </style>
 </head>
@@ -97,16 +131,22 @@
     <h1>Soumesh Banerjee</h1>
     <div class="role">Software Engineer</div>
     <div class="meta">
-      <span>
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9-6 9 6v12a1 1 0 01-1 1H4a1 1 0 01-1-1V8z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 21V12h6v9"></path></svg>
+      <span class="meta-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><circle cx="12" cy="11" r="3" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
         Oslo, Norway
       </span>
-      <span>
+      <span class="meta-item">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
         <a href="mailto:soumeshbanerjee@live.com">soumeshbanerjee@live.com</a>
       </span>
-      <span class="badge">Open to Relocate</span>
-      <span class="badge">3 Months Notice</span>
+      <span class="meta-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+        Open to Relocate
+      </span>
+      <span class="meta-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3"></path></svg>
+        3 Months Notice
+      </span>
     </div>
     <div class="links">
       <a class="link-btn" href="https://github.com/pwmb" target="_blank">
@@ -119,7 +159,7 @@
       </a>
       <a class="link-btn" href="https://stackoverflow.com/users/2256024" target="_blank">
         <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.36 20.2v-5.38h1.79V22H3v-7.18h1.8v5.38h12.56zM6.77 14.32l8.45 1.76.37-1.76-8.44-1.76-.38 1.76zm1.15-4.17l7.82 3.63.75-1.62-7.82-3.63-.75 1.62zm2.26-3.99l6.63 5.4 1.13-1.38-6.62-5.4-1.14 1.38zm4.15-4.17l-1.44 1.07 5.2 6.99 1.44-1.07-5.2-6.99zM6.59 18.41h8.97v-1.8H6.59v1.8z"></path></svg>
-        Stack Overflow
+        /u/2256024
       </a>
     </div>
   </div>
@@ -137,7 +177,7 @@
         <div class="job-date">May 2024 – Present</div>
       </div> 
       <div class="tags">
-        <span class="tag">.Net / C#</span><span class="tag">Kubernetes</span><span class="tag">Elasticsearch</span><span class="tag">Grafana</span><span class="tag">Azure Service Bus</span><span class="tag">NServiceBus</span><span class="tag">NServiceBus</span>
+        <span class="tag">.Net / C#</span><span class="tag">Kubernetes</span><span class="tag">Elasticsearch</span><span class="tag">Grafana</span><span class="tag">Azure Service Bus</span><span class="tag">NServiceBus</span><span class="tag">OpenTelemetry</span><span class="tag">Keycloak</span>
       </div>
       <ul>
         <li>Modernized legacy systems and start using various open standards.</li>
@@ -238,22 +278,6 @@
   <div class="section">
     <div class="section-title">Skills</div>
     <div class="skills-grid">
-      <span class="skill">Node.js / TypeScript</span>
-      <span class="skill">Python</span>
-      <span class="skill">GoLang</span>
-      <span class="skill">Kotlin / Java</span>
-      <span class="skill">React / Next.js</span>
-      <span class="skill">Vue.js / Nuxt</span>
-      <span class="skill">Docker</span>
-      <span class="skill">Kubernetes</span>
-      <span class="skill">Terraform</span>
-      <span class="skill">Prometheus</span>
-      <span class="skill">Grafana</span>
-      <span class="skill">Datadog</span>
-      <span class="skill">GraphQL</span>
-      <span class="skill">MongoDB</span>
-      <span class="skill">PostgreSQL</span>
-      <span class="skill">Neo4j</span>
     </div>
   </div>
 
@@ -271,6 +295,35 @@
 
 </div>
 
+</div>
+
+<script>
+  function aggregateSkills() {
+    const seen = new Set();
+    const unique = [];
+
+    // Collect existing skills first, then tags from experience
+    document.querySelectorAll('.skill, .tag').forEach(el => {
+      const name = el.textContent.trim();
+      const key = name.toLowerCase();
+      if (!seen.has(key)) {
+        seen.add(key);
+        unique.push(name);
+      }
+    });
+
+    const grid = document.querySelector('.skills-grid');
+    grid.innerHTML = '';
+    unique.forEach(name => {
+      const span = document.createElement('span');
+      span.className = 'skill';
+      span.textContent = name;
+      grid.appendChild(span);
+    });
+  }
+
+  aggregateSkills();
+</script>
 
 </body>
 </html>
